@@ -35,14 +35,26 @@ router.get('/:id', (req, res) => {
     include: [db.author]
   })
   .then((article) => {
-    if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
+    if (!article) throw Error();
+    
+        article.getComments().then(comments => {
+        // console.log(comments)
+      res.render('articles/show', { article: article, comments: comments});
+    })
+  }).catch(error => {
+    console.log(error);
+    res.status(400).render('main/404');
   })
-  .catch((error) => {
-    console.log(error)
-    res.status(400).render('main/404')
+})
+
+router.post('/:id/comments', (req,res) => {
+  const post = req.body.id
+  db.comment.create({
+    name: req.body.name,
+    content: req.body.content,
+    articleId: req.body.id
   })
+  res.redirect(`/articles/${post}`)
 })
 
 module.exports = router

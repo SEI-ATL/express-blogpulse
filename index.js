@@ -3,6 +3,8 @@ let ejsLayouts = require('express-ejs-layouts')
 let db = require('./models')
 let moment = require('moment')
 let rowdy = require('rowdy-logger')
+const { response } = require('express')
+const comment = require('./models/comment')
 let app = express()
 
 rowdy.begin(app)
@@ -32,12 +34,13 @@ app.get('/', (req, res) => {
   })
 })
 
+
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
 
 var server = app.listen(process.env.PORT || 3000, () => {
-  rowdy.print()
+  // rowdy.print()
 })
 
 module.exports = server
