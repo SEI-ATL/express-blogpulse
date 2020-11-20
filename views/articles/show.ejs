@@ -8,11 +8,11 @@
 
 <h2>Comments</h2>
 
-<% if(article && article.comments) { %>
-    <% article.comments.forEach(function(c) { %>
+<% if (comments) { %>
+    <% comments.forEach(function(c) { %>
         <div class="well">
-            <h3><%= c.name %> says:</h3>
-            <p><%= c.content %></p>
+            <h3><%= c.dataValues.name %> says:</h3>
+            <p><%= c.dataValues.content %></p>
         </div>
     <% }) %>
 <% } else { %>
