@@ -1,5 +1,5 @@
-let router = require('express').Router();
-let db = require('../models');
+const router = require('express').Router();
+const db = require('../models');
 
 
 router.post('/', (req, res) => {
@@ -9,8 +9,6 @@ router.post('/', (req, res) => {
     articleId: req.body.articleId
   }).then(comment => {
     res.redirect(`/articles/${req.body.articleId}`);
-  }).catch(error => {
-    res.status(400).render('main/404');
   });
 });
 
