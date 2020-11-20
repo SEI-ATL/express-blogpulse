@@ -1,8 +1,50 @@
 .hero {
     width: 100%;
     height: auto;
+    border-radius: 12px;
 }
 
 .panel {
-    background-color: #77777715;
+    background-color: #faf8f8b7;
+    border-radius: 12px;
+}
+
+body {
+    background-color: rgba(115, 216, 241, 0.459);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+a {
+    color: rgba(156, 156, 156, 0.7);
+}
+
+form a {
+    color: lightslategray;
+}
+
+a#back {
+    color: rgba(35, 102, 190, 0.993)
+}
+
+.well {
+    border-radius: 12px;
+}
+
+h1 {
+    font-family: 'Bad Script', cursive;
+}
+
+.btn-primary {
+    background-color: rgba(34, 137, 206, 0.459);
+    border: none;
+}
+
+h4.article {
+    margin: 1rem;
+    margin-bottom: 3rem;
+}
+
+.panel p.commenter {
+    color: rgba(42, 91, 155, 0.993);
 }

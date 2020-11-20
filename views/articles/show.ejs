@@ -5,19 +5,21 @@
     <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
-<p>
+<h4 class='article'>
     <%= article.content %>
-</p>
+</h4>
 <hr />
 <h2>Comments:</h2>
 <% for (let i =0; i<article.comments.length; i++){ %>
     <% let comment = article.comments[i].dataValues%>
         <div class="panel panel-default">
             <div class="panel-body">
-                <p>
+                <h4>
                     <%= comment.content %>
+                </h4>
+                <p class="commenter">-
+                    <%= comment.user %>
                 </p>
-                <p><strong>- <%= comment.user %></strong></p>
             </div>
         </div>
         <% } %>
@@ -38,8 +40,8 @@
                     <textarea class="form-control" type="text" name="content" id="comment"></textarea>
                 </div>
                 <input type="hidden" name="articleId" value='<%= article.id %>'>
-                <input type="submit" value="Comment">
+                <input type="submit" value="Comment" class="btn btn-primary">
             </form>
             <hr />
 
-            <a href="/">&larr; Back Home</a>
+            <a id="back" href="/">&larr; Back Home</a>
