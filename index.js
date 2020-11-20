@@ -32,6 +32,10 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/articles/:id', (req, res) => {
+  
+})
+
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
