@@ -8,4 +8,18 @@
 
 <hr />
 
+<p>
+  <strong>Comments</strong>
+</p>
+
+<ul>
+  <% comments.forEach((comment) => { %>
+    <li>
+    "<%= comment.comment %>" <br>- <strong><%= comment.username %></strong> 
+    <%= moment(comment.createdAt).format('LT') %>
+    </li>
+  <%  }); %> 
+</ul>
+
+
 <a href="/">&larr; Back Home</a>
