@@ -28,7 +28,7 @@ router.get('/new', (req, res) => {
   })
 })
 
-// GET /articles/:id - display a specific post and its author
+// GET /articles/:id - display a specific post and its author and its comments
 router.get('/:id', (req, res) => {
   db.article.findOne({
     where: { id: req.params.id },
