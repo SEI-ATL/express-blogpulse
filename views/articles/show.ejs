@@ -9,3 +9,19 @@
 <hr />
 
 <a href="/">&larr; Back Home</a>
+
+<h3>Comments:</h3>
+<% comments.forEach(comment => { %> 
+   <p> <%= comment.name %> </p>  
+   <p><%= comment.content %></p>  
+<% }); %>
+
+
+<form accept="articles/:id" action="POST">
+  <h4>Your comment Here</h4>
+  <p>Name</p>
+<input type="text" id="name" name="name"><br>
+<p>Comment</p>
+<input type="text" id="content" name="content"><br>
+<input type="button" value="submit">
+</form>
