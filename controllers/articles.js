@@ -30,25 +30,31 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', (req, res) => {
   db.article.findOne({
-      where: { id: req.params.id },
-      include: [db.author]
+    where: { id: req.params.id },
+    include: [db.author]
   })
   .then((article) => {
-      article.getComments().then(comments => {
-          console.log(comments);
-          res.render('articles/show', {article: article, comments: comments})
-      })
+    if (!article) throw Error();
+    
+        article.getComments().then(comments => {
+        // console.log(comments)
+      res.render('articles/show', { article: article, comments: comments});
+    })
+  }).catch(error => {
+    console.log(error);
+    res.status(400).render('main/404');
   })
 })
 
-router.post('/:id/comments', (req, res) => {
+router.post('/:id/comments', (req,res) => {
+  console.log(req)
+  const post = req.body.id
   db.comment.create({
     name: req.body.name,
     content: req.body.content,
-    articleId: req.body.articleId
-  }).then(comment => {
-    res.redirect(`/articles/${req.body.articleId}`);
+    articleId: req.body.id
   })
-});
+  res.redirect(`/articles/${post}`)
+})
 
 module.exports = router
