@@ -45,13 +45,24 @@ router.get('/:id', (req, res) => {
       }
     })
     .then(comments => {
-      console.log(comments)
       res.render('articles/show', { article: article, comments: comments })
     })
   })
   .catch((error) => {
     console.log(error)
     res.status(400).render('main/404')
+  })
+})
+
+// POST /comment - will redirect back to article/:id
+router.post('/:id/comment', (req, res) => {
+  
+  db.comment.create({
+    username: req.body.username,
+    comment: req.body.comment,
+    articleId: req.params.id
+  }).then(() =>{
+    res.redirect(`/articles/${req.params.id}`)
   })
 })
 
