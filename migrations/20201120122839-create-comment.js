@@ -14,7 +14,7 @@ module.exports = {
       content: {
         type: Sequelize.TEXT
       },
-      article_id: {
+      articleId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
