@@ -45,4 +45,16 @@ router.get('/:id', (req, res) => {
   })
 })
 
+// router.get('/:id', (req, res) => { 
+//   db.article.findOne({      
+//     where: { id: req.params.id },      
+//     include: [db.author] })  
+//   .then((article) => {  
+//       article.getComments().then(comments =>  { 
+//       console.log(comments);   
+//       res.render('articles/show', { article: article, comments: comments })
+//       })  
+//   })
+// });
+
 module.exports = router
