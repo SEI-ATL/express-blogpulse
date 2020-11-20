@@ -37,12 +37,42 @@ router.get('/:id', (req, res) => {
   .then((article) => {
     if (!article) throw Error()
     console.log(article.author)
-    res.render('articles/show', { article: article })
+    const comments = db.comment.findAll( {where: {
+      articleId : req.params.id
+    }}).then( (comments)=> res.render('articles/show', {article, comments}))
+    // res.render('articles/show', { article: article })
   })
   .catch((error) => {
     console.log(error)
     res.status(400).render('main/404')
   })
+
+  // db.comment.findAll().then((comments) => {(res.render({comments}))})
+})
+router.post('/:id', (req, res) => {
+  console.log(req.params.id)
+  const commentContent = req.body.commentContent
+  const commentName = req.body.commentName
+  db.comment.create({content: commentContent, creator: commentName, articleId:req.params.id})
+  .then((() => {  
+    const article = db.article.findOne({
+    where: { id: req.params.id },
+    include: [db.author]
+  })
+  .then(res.render('articles/show', { article }))
+  // shows on page when refreshed
+}))
+  // .catch((err) => {
+  //   console.log(err)
+  //   res.status(400).render('main/404')
+  // })
 })
 
+// router.post('/articles/:id', (req, res) => {
+//   const id = req.params.id
+//   console.log(id)
+//   res.send("hello I am here")
+// })
 module.exports = router
+
+

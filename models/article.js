@@ -5,7 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class article extends Model {
     static associate(models) {
-      models.article.belongsTo(models.author)
+      models.article.belongsTo(models.author);
+      models.article.hasMany(models.comment);
     }
   };
   article.init({

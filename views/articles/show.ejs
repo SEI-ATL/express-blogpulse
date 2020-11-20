@@ -7,5 +7,23 @@
 <p><%= article.content %></p>
 
 <hr />
+<ul>
+<% comments.forEach(comment => { %>
+
+  <div class="comment"><%=comment.creator%> : <%=comment.content%></div>
+  
+  
+<% }); %>
+
+</ul>
+
+<% console.log(article) %>
+
+<form method="POST" action="">
+  <input id="submit" type="submit" value="Post Comment">
+  <input type="text" name="commentContent" id="content" placeholder="Content">
+  <input type="text" name="commentName" id="name" placeholder="Name">
+</form>
+
 
 <a href="/">&larr; Back Home</a>
