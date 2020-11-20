@@ -8,4 +8,36 @@
 
 <hr />
 
+<h3>Comments</h3>
+
+
+<% if(comments) { %>
+  <% comments.forEach(function(comment) { %>
+    <div class="well">
+      <p>
+        <%= comment.content %>
+      </br>
+        <strong>- <%= comment.name %></strong> 
+      </p>
+    </div>
+  <% }) %>
+<% } else { %>
+  <h3>Be the first to comment below</h3>
+<% } %>
+
+<form action="/articles/:id/comments" method="POST">
+  <div class="form-group">
+    <label for="Name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="content">Comment</label>
+    <textarea type="text" class="form-control" id="content" name="content" required></textarea>
+  </div>
+  <input type="hidden" name="id" id="id" value="<%= article.id %>">
+  <input type="submit" class="btn btn-primary">
+</form>
+
 <a href="/">&larr; Back Home</a>
