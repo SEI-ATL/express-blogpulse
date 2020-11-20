@@ -4,6 +4,9 @@ let db = require('./models')
 let moment = require('moment')
 let rowdy = require('rowdy-logger')
 let app = express()
+    //markdown parser
+const MarkdownIt = require('markdown-it');
+const md = new MarkdownIt();
 
 rowdy.begin(app)
 

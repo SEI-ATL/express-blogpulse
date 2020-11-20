@@ -1,12 +1,14 @@
 let express = require('express')
 let db = require('../models')
 let router = express.Router()
+const MarkdownIt = require('markdown-it');
+const md = new MarkdownIt();
 
 // POST /articles - create a new post
 router.post('/', (req, res) => {
     db.article.create({
             title: req.body.title,
-            content: req.body.content,
+            content: md.render(req.body.content),
             authorId: req.body.authorId
         })
         .then((post) => {
