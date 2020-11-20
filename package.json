@@ -14,13 +14,24 @@
     "eslint": ">=4.18.2"
   },
   "dependencies": {
-    "ejs": "^2.4.2",
-    "express": "^4.13.4",
-    "express-ejs-layouts": "^2.1.0",
+    "axios": "^0.21.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
     "moment": "^2.13.0",
     "morgan": "^1.7.0",
     "pg": "^8.5.1",
     "rowdy-logger": "0.0.2",
     "sequelize": "^6.3.5"
-  }
+  },
+  "description": "To practice 1:M associations, we'll be adding comment functionality to an existing blog application.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtreeves/express-blogpulse.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/jtreeves/express-blogpulse/issues"
+  },
+  "homepage": "https://github.com/jtreeves/express-blogpulse#readme"
 }
