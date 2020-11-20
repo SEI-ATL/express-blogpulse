@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.author.hasMany(models.article)
     }
+    getFullName() {
+      return this.firstName + this.lastName
+    }
   };
   author.init({
     firstName: DataTypes.STRING,
