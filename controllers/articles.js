@@ -30,29 +30,50 @@ router.get('/new', (req, res) => {
 
 // GET /articles/:id - display a specific post and its author
 router.get('/:id', (req, res) => {
-  db.article.findOne({
-    where: { id: req.params.id },
-    include: [db.author]
-  })
-  .then((article) => {
-    if (!article) throw Error()
-    console.log(article.author)
-    const comments = db.comment.findAll( {where: {
-      articleId : req.params.id
-    }}).then( (comments)=> res.render('articles/show', {article, comments}))
-    // res.render('articles/show', { article: article })
-  })
-  .catch((error) => {
-    console.log(error)
-    res.status(400).render('main/404')
-  })
+  // Can use async for the (req, res) => {} like this async (req, res)
+  // db.article.findOne({
+  //   where: { id: req.params.id },
+  //   include: [db.author]
+  // })
+  // .then((article) => {
+  //   if (!article) throw Error()
+  //   console.log(article.author)
+  //   const comments = db.comment.findAll( {where: {
+  //     articleId : req.params.id
+  //   }}).then( (comments)=> res.render('articles/show', {article, comments}))
+  //   // res.render('articles/show', { article: article })
+  // })
+  // .catch((error) => {
+  //   console.log(error)
+  //   res.status(400).render('main/404')
+  // })
 
   // db.comment.findAll().then((comments) => {(res.render({comments}))})
+
+  // ABOVE WORKS BUT THIS IS USING async await
+  async function tempAsyncFunction() {
+  const article = await db.article.findOne({
+    where: {id: req.params.id },
+    include: [db.author, db.comment]
+  })
+
+  if (!article) throw Error()
+  res.render('articles/show', { article: article})
+  }
+
+  tempAsyncFunction()
+
+
 })
+
+
+
 router.post('/:id', (req, res) => {
-  console.log(req.params.id)
-  const commentContent = req.body.commentContent
-  const commentName = req.body.commentName
+  // console.log(req.params.id)
+  const commentContent = req.body.comment.content
+  const commentName = req.body.comment.creator
+  console.log(commentContent, "commentContent")
+  console.log(commentName, "commentName")
   db.comment.create({content: commentContent, creator: commentName, articleId:req.params.id})
   .then((() => {  
     const article = db.article.findOne({
@@ -76,3 +97,4 @@ router.post('/:id', (req, res) => {
 module.exports = router
 
 
+// When using POST PUT OR DELETE ROUTES you can res.redirect

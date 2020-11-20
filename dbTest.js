@@ -1,11 +1,13 @@
 const db = require('./models')
 
-async function test() {
-  const article = await db.article.findOne({
-    where: { id: 1 },
-    include: [db.comment]
+async function dbTest() {
+  const article = await db.article.findOne()
+  const comment = await db.comment.create({
+    creator: 'Paul Allen',
+    content: 'This is really neat! Thanks for posting.',
+    articleId: article.id
   })
-  // by using eager loading, the article model should have a comments key
-  console.log(article.comments)
+  console.log(comment)
 }
-test()
+
+dbTest()

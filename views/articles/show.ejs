@@ -8,7 +8,7 @@
 
 <hr />
 <ul>
-<% comments.forEach(comment => { %>
+<% article.comments.forEach(comment => { %>
 
   <div class="comment"><%=comment.creator%> : <%=comment.content%></div>
   
@@ -19,11 +19,19 @@
 
 <% console.log(article) %>
 
-<form method="POST" action="">
-  <input id="submit" type="submit" value="Post Comment">
-  <input type="text" name="commentContent" id="content" placeholder="Content">
-  <input type="text" name="commentName" id="name" placeholder="Name">
+<form method="POST" action="/comments">
+  <input type="hidden" name="articleId" value="<%= article.id %>">
+
+  <label for="creator">Creator</label>
+  <input type="text" name="creator" id="creator">
+
+  <label for="content">Content</label>
+  <input type="text" name="content" id="content">
+
+  <input type="submit">
 </form>
 
 
 <a href="/">&larr; Back Home</a>
+
+
