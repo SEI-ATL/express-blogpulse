@@ -36,13 +36,36 @@ router.get('/:id', (req, res) => {
   })
   .then((article) => {
     if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
-  })
+    // console.log(article.author)
+    ///////////////////////////
+    db.article.findAll({
+      where: { id: req.params.id },
+      include: [db.comment]
+    }).then((com)=>{
+      let comment =com[com.length-1].comments
+      console.log(comment);
+      // console.log(com[com.length-1].comments[0].dataValues.name)
+      res.render('articles/show', { article: article, id: req.params.id, comment })
+    }
+    
+    
+  
+
+).catch((error) => {
+  console.log(error)
+  res.status(400).render('main/404')
+
+    ///////////////////////////
+    
+  })})
   .catch((error) => {
     console.log(error)
     res.status(400).render('main/404')
   })
-})
+     
+       
+
+
+})   
 
 module.exports = router
