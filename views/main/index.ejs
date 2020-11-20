@@ -8,21 +8,21 @@
     <h1>Latest Posts from BlogPulse</h1>
 
     <% articles.forEach(function(a) { %>
-      <div class="well">
-        <h2>
-          <a href="/articles/<%= a.id %>"><%= a.title %></a>
-          <small>by <%= a.author.getFullName() %></small>
-        </h2>
-        <p>
-          <strong><%= moment(a.createdAt).calendar() %></strong>
-        </p>
-      </div>
+    <div class="well">
+      <h2>
+        <a href="/articles/<%= a.id %>"><%= a.title %></a>
+        <small>by <%= `${a.author.firstName} ${a.author.lastName}` %></small>
+      </h2>
+      <p>
+        <strong><%= moment(a.createdAt).calendar() %></strong>
+      </p>
+    </div>
     <% }) %>
 
   </div>
   <div class="col-sm-4">
     <h2>About</h2>
     <p>BlogPulse is an up-and-coming player in the global media market,
-    providing user-generated content across all topics.</p>
+      providing user-generated content across all topics.</p>
   </div>
 </div>
