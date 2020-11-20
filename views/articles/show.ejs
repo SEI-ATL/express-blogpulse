@@ -8,4 +8,16 @@
 
 <hr />
 
+<% if(article.comments.length > 0) { %>
+<% article.comments.forEach(comment => { %>
+<p>
+  <%= comment.name %>
+</p>
+<p>
+  <%= comment.comment %>
+</p>
+<% }) } else { %>
+  <p>No comments</p>
+<% } %>
+
 <a href="/">&larr; Back Home</a>

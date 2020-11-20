@@ -32,11 +32,12 @@ router.get('/new', (req, res) => {
 router.get('/:id', (req, res) => {
   db.article.findOne({
     where: { id: req.params.id },
-    include: [db.author]
+    include: [db.author, db.comment] // Addition of 'db.comment' here to grab all comments associated with the article. 
   })
   .then((article) => {
     if (!article) throw Error()
     console.log(article.author)
+    console.log(article.comments) // Why does this work plural but not singular?
     res.render('articles/show', { article: article })
   })
   .catch((error) => {
