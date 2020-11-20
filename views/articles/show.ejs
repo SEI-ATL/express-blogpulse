@@ -1,4 +1,6 @@
-<h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
+<h1>
+  <%= article.title %> <small>by <%= article.author.getFullName() %></small>
+</h1>
 
 <p>
   <strong><%= moment(article.createdAt).calendar() %></strong>
@@ -9,15 +11,31 @@
 <hr />
 
 <% if(article.comments.length > 0) { %>
+<!-- Sequelize making it plural due to hasMany-->
 <% article.comments.forEach(comment => { %>
+<!-- Looping through comments with forEach, could use a for loop too-->
 <p>
   <%= comment.name %>
+  <!-- Not using plural here. This is the parameter from forEach-->
 </p>
-<p>
-  <%= comment.comment %>
-</p>
+<p><%= comment.comment %></p>
 <% }) } else { %>
-  <p>No comments</p>
+<p>No comments</p>
 <% } %>
+
+<!-- Add Comment-->
+<h1>Share Your Comment</h1>
+<form method="POST" action="/comments"> <!-- Since I want the page returned to the article after posting, have action=article-->
+  <input type="hidden" name="articleId" value="<%= article.id%>" /> <!--Needed to associate the comment with the article-->
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required/>
+  <br />
+  <label for="comment">Comment</label>
+  <input type="text" id="comment" name="comment" required/>
+  <br>
+  <input type="submit" />
+</form>
+
+<hr />
 
 <a href="/">&larr; Back Home</a>

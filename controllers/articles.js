@@ -36,8 +36,8 @@ router.get('/:id', (req, res) => {
   })
   .then((article) => {
     if (!article) throw Error()
-    console.log(article.author)
-    console.log(article.comments) // Why does this work plural but not singular?
+    //console.log(article.author)
+    //console.log(article.comments) // Why does this work plural but not singular?
     res.render('articles/show', { article: article })
   })
   .catch((error) => {
@@ -46,4 +46,4 @@ router.get('/:id', (req, res) => {
   })
 })
 
-module.exports = router
+module.exports = router;
