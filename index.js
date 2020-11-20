@@ -28,7 +28,13 @@ app.get('/', (req, res) => {
     db.article.findAll({
         include: [db.author]
     }).then((articles) => {
-        res.render('main/index', { articles: articles })
+        db.author.findAll().then(authors => {
+            res.render('main/index', { articles: articles, authors: authors });
+        }).catch((error) => {
+            console.log(error)
+            res.status(400).render('main/404')
+        })
+
     }).catch((error) => {
         console.log(error)
         res.status(400).render('main/404')
