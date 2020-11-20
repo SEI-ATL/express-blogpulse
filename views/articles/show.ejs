@@ -1,11 +1,15 @@
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@900&display=swap');
+
+
 #commentowa {
-  background-color: rgb(211, 203, 203);
-  border-radius: 5%;
+  background-color: rgb(130, 194, 247);
+  border-radius: 5px;
   width:20%;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   margin-left: 15px;
+  color: rgb(70, 54, 54);
 }
 
 h6 {
@@ -13,22 +17,38 @@ h6 {
  font-weight: 800;
  padding: 4px;
 }
+h1{
+  font-family: 'Big Shoulders Stencil Display', cursive;
+}
 
 small {
   font-size: 12px;
   padding: 4px;
 }
+.banner {
+  background-color: turquoise;
+  width:30%;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+p{
+  font-size: 13px;;
+}
 </style>
 
-<h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
+<h1><%= article.title %> 
+ 
+  <small>by <%= article.author.getFullName() %></small></h1>
 
 <p>
+  <div class="banner">
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
 <p><%= article.content %></p>
 
-
+</div>
 <% comment.forEach(function(com){ %>
   <div id="commentowa">
   <h6><%= com.dataValues.name %></h4>
