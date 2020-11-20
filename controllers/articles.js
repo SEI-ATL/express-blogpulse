@@ -39,9 +39,10 @@ router.get("/:id", (req, res) => {
       // this will generate a property that is plural
     })
     .then((article) => {
+      
       if (!article) throw Error();
-      console.log(article.author);
-      console.log(article.comments);
+      // console.log(article.author);
+      // console.log(article.comments);
       res.render("articles/show", { article: article });
     })
     .catch((error) => {
@@ -49,6 +50,33 @@ router.get("/:id", (req, res) => {
       res.status(400).render("main/404");
     });
 });
+
+/////////////// USING ASYNC/AWAIT///////////////////////
+// // 1. AWAIT UNTIL SOMETHING COMPLETES
+// // 2. ASYNC THE FUNCTION THAT SHOULD RUN
+// router.get("/:id", async (req, res) => { // 2. ASYNC THIS TO WAIT UNTIL -1- is done
+// // need to assign it to a var otherwise it disappears
+// const article = await db.article.findOne({ // 1. AWAIT UNTIL THIS IS DONE
+//   where: { id: req.params.id },
+//   include: [db.author, db.comment]
+// })
+
+// if (!article) throw Error()
+// res.render('articles/show', {article})
+// }
+
+/// can also wrap the function to be waited on seperately?
+
+
+
+
+
+
+
+
+
+
+
 
 
 
