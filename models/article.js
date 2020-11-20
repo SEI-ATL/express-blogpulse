@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class article extends Model {
     static associate(models) {
       models.article.belongsTo(models.author)
-    }
-  };
+      };
+    };
   article.init({
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
