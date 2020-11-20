@@ -1,11 +1,44 @@
-<h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
+<h1>
+  <%= article.title %> <small>by <%= article.author.getFullName() %></small>
+</h1>
 
 <p>
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
-<p><%= article.content %></p>
+<p><span class="articlebody"><%= article.content %></span></p>
+<hr />
 
+<h3>Comment:</h3>
+<form method="POST" action="/articles/comment">
+  <div class="form-group">
+    <input type="text" name="commentor" placeholder="Name" />
+  </div>
+  <div class="form-group">
+    <textarea
+      name="content"
+      class="form-control"
+      placeholder="Type Comment"
+    ></textarea>
+    <input type="hidden" name="articleId" value="<%=article.id%>" />
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" />
+  </div>
+</form>
+
+<div class="commentsbox">
+  <h3>What others are saying:</h3>
+
+  <% article.comments.forEach(comment => { %>
+
+  <p>
+    <span class="comment"> "<%=comment.content %>"</span>
+    <span class="commentor"> - <%=comment.commentor %></span>
+  </p>
+
+  <%}) %>
+</div>
 <hr />
 
 <a href="/">&larr; Back Home</a>
