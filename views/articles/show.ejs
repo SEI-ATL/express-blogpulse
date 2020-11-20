@@ -10,34 +10,42 @@
 </h4>
 <hr />
 <h2>Comments:</h2>
-<% for (let i =0; i<article.comments.length; i++){ %>
-    <% let comment = article.comments[i].dataValues%>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h4>
-                    <%= comment.content %>
-                </h4>
-                <p class="commenter">-
-                    <%= comment.user %>
-                </p>
+<% if (article.comments.length > 0) { %>
+    <% for (let i =0; i<article.comments.length; i++){ %>
+        <% let comment = article.comments[i].dataValues%>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>
+                        <%= comment.content %>
+                    </h4>
+                    <p class="commenter">-
+                        <%= comment.user %>
+                    </p>
+                </div>
             </div>
-        </div>
-        <% } %>
-            <hr />
-            <h4 class='commentSection'>Join the conversation:</h4>
-            <form action="/articles/comments" method='POST'>
-                <div class="form-group">
-                    <label for="author">Name</label>
-                    <input name="user" id="author" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="comment">Comment</label>
-                    </br>
-                    <textarea class="form-control" type="text" name="content" id="comment"></textarea>
-                </div>
-                <input type="hidden" name="articleId" value='<%= article.id %>'>
-                <input type="submit" value="Comment" class="btn btn-primary">
-            </form>
-            <hr />
+            <% } %>
+                <% } else {%>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h4 class="first">Be the first to comment!</h4>
+                        </div>
+                    </div>
+                    <% } %>
+                        <hr />
+                        <h4 class='commentSection'>Join the conversation:</h4>
+                        <form action="/articles/comments" method='POST'>
+                            <div class="form-group">
+                                <label for="author">Name</label>
+                                <input name="user" id="author" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment</label>
+                                </br>
+                                <textarea class="form-control" type="text" name="content" id="comment"></textarea>
+                            </div>
+                            <input type="hidden" name="articleId" value='<%= article.id %>'>
+                            <input type="submit" value="Comment" class="btn btn-primary">
+                        </form>
+                        <hr />
 
-            <a id="back" href="/">&larr; Back Home</a>
+                        <a id="back" href="/">&larr; Back Home</a>

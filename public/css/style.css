@@ -32,8 +32,13 @@ a#back {
 }
 
 h1,
-h2.about {
+h2.about,
+h4.first {
     font-family: 'Bad Script', cursive;
+}
+
+h4.first {
+    padding-left: 2rem;
 }
 
 h1.main-title {
