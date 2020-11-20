@@ -1,3 +1,3 @@
-$(document).ready(() => {
-  console.log("Hello front end JS!")
-});
+$('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').focus()
+})

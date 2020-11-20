@@ -1,20 +1,21 @@
 'use strict';
 const {
-  Model
+    Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class article extends Model {
-    static associate(models) {
-      models.article.belongsTo(models.author)
-    }
-  };
-  article.init({
-    title: DataTypes.STRING,
-    content: DataTypes.TEXT,
-    authorId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'article',
-  });
-  return article;
+    class article extends Model {
+        static associate(models) {
+            models.article.belongsTo(models.author);
+            models.article.hasMany(models.comment)
+        }
+    };
+    article.init({
+        title: DataTypes.STRING,
+        content: DataTypes.TEXT,
+        authorId: DataTypes.INTEGER
+    }, {
+        sequelize,
+        modelName: 'article',
+    });
+    return article;
 };

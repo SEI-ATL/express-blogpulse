@@ -1,11 +1,45 @@
-<h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
+<h1>
+    <%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
 
 <p>
-  <strong><%= moment(article.createdAt).calendar() %></strong>
+    <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
-<p><%= article.content %></p>
-
+<p>
+    <%= article.content %>
+</p>
 <hr />
+<h2>Comments:</h2>
+<% for (let i =0; i<article.comments.length; i++){ %>
+    <% let comment = article.comments[i].dataValues%>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <%= comment.content %>
+                </p>
+                <p><strong>- <%= comment.user %></strong></p>
+            </div>
+        </div>
+        <% } %>
+            <hr />
+            <form action="/articles/comments" method='POST'>
+                <div class="form-group">
+                    <label for="author">Name</label>
+                    <select name="user" id="author" class="form-control" required>
+                  <% authors.forEach(function(author) { %>
+                    <option value="<%= author.firstName %> <%= author.lastName %>"><%= author.getFullName() %></option>
+                  <% }) %>
+                </select>
+                    <p>If your name doesn't show up, please <a href="/authors/new">sign up to be an author.</a></p>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Content</label>
+                    </br>
+                    <textarea class="form-control" type="text" name="content" id="comment"></textarea>
+                </div>
+                <input type="hidden" name="articleId" value='<%= article.id %>'>
+                <input type="submit" value="Comment">
+            </form>
+            <hr />
 
-<a href="/">&larr; Back Home</a>
+            <a href="/">&larr; Back Home</a>

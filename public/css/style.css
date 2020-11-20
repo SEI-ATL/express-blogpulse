@@ -1,4 +1,8 @@
 .hero {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
+}
+
+.panel {
+    background-color: #77777715;
 }
