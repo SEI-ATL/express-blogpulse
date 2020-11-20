@@ -29,20 +29,58 @@ router.get('/new', (req, res) => {
 })
 
 // GET /articles/:id - display a specific post and its author
+// router.get('/:id', (req, res) => {
+//   db.article.findOne({
+//     where: { id: req.params.id },
+//     include: [db.author]
+//   })
+//   .then((article) => {
+//     if (!article) throw Error()
+//     console.log(article.author)
+//     res.render('articles/show', { article: article })
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//     res.status(400).render('main/404')
+//   })
+// })
+
+
 router.get('/:id', (req, res) => {
   db.article.findOne({
-    where: { id: req.params.id },
-    include: [db.author]
+      where: { id: req.params.id },
+      include: [db.author]
   })
   .then((article) => {
-    if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
-  })
-  .catch((error) => {
-    console.log(error)
-    res.status(400).render('main/404')
+      article.getComments().then(comments => {
+          console.log(comments);
+          res.render('articles/show', {article: article, comments: comments})
+      })
   })
 })
+
+router.post('/:id', (req,res)=>{
+  console.log(req.params.id);
+  const commentContent = req.body.commentContent
+  const commentName = req.body.commentName
+  db.comment.create({content: commentContent,
+  creator: commentName,
+  articleId: req.params.id
+  }).then((()=>{
+    const article = db.article.findOne({
+      where:{id: req.params.id},
+      include: [db.author]
+    })
+    .then(res.render('articles/show',{article}))
+  }))
+})
+
+
+  
+// }).catch((error) => {
+//       console.log(error)
+//       res.status(400).render('main/404')
+//     })
+
 
 module.exports = router
