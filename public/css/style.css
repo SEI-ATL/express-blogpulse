@@ -42,7 +42,11 @@ h1 {
 h4.article {
     margin: 1rem;
     margin-bottom: 3rem;
-    font-family: 'Roboto', sans-serif;
+}
+
+h4.commentSection,
+h4.modal-title {
+    font-family: 'Bad Script', cursive;
 }
 
 .panel p.commenter {
