@@ -6,7 +6,7 @@ db.comment.create({
     content: req.body.params,
     name: req.body.name,
     articleId: req.body.articleId
-}).then((_comment)=>{
+}).then((comment)=>{
     res.redirect (`/articles/${req.body.articleId}`)
     })
 })
