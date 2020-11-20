@@ -1,10 +1,25 @@
 <h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
 
-<p>
-  <strong><%= moment(article.createdAt).calendar() %></strong>
-</p>
+<p><strong><%= moment(article.createdAt).calendar() %></strong></p>
 
 <p><%= article.content %></p>
+
+<a href="/comments/new" class="btn btn-primary">Create a new comment</a>
+
+<hr />
+
+<h2>Comments</h2>
+
+<% if(article && article.comments) { %>
+    <% article.comments.forEach(function(c) { %>
+        <div class="well">
+            <h3><%= c.name %> says:</h3>
+            <p><%= c.content %></p>
+        </div>
+    <% }) %>
+<% } else { %>
+    <h3>No comments yet!</h3>
+<% } %>
 
 <hr />
 
