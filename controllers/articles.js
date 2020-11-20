@@ -29,16 +29,30 @@ router.get('/new', (req, res) => {
 })
 
 // GET /articles/:id - display a specific post and its author
-router.get('/:id', (req, res) => { 
-  db.article.findOne({      
+//commented out portion is using .then, writing async on (req, res) allows you to use await!!
+router.get('/:id', async (req, res) => { 
+  // using .then
+  
+  // db.article.findOne({      
+  //   where: { id: req.params.id },      
+  //   include: [db.author, db.comment] })  
+  // .then((article) => {  
+  //   if (!article) throw Error()
+  //     console.log(article)  
+  //   // article.getComments().then(comments =>  { 
+  //     // console.log(comments);   
+  //     res.render('articles/show', { article: article })
+  // }) 
+  // .catch((error) => {
+  //   console.log(error)
+  //   res.status(400).render('main/404')
+  // }) 
+  const article = await db.article.findOne({
     where: { id: req.params.id },      
-    include: [db.author] })  
-  .then((article) => {  
-      article.getComments().then(comments =>  { 
-      console.log(comments);   
-      res.render('articles/show', { article: article, comments: comments })
-      })  
+    include: [db.author, db.comment] 
   })
+  if (!article) throw Error()
+  res.render('articles/show', { article: article })
 });
 
 router.post('/:id/comments', (req, res) => {
