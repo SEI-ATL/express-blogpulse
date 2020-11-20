@@ -44,5 +44,16 @@ router.get('/:id', (req, res) => {
     res.status(400).render('main/404')
   })
 })
+// GET comments from database
+router.get('/comments', (req, res) => { // is /comments correct?
+  db.comments.findAll({
+    where: { articleid: articleid},
+    include: [db.username]
+  }).then((comments) => {
+    res.render('/articles/show/', { content: content })
+  }).catch((error) => {
+    res.status(400).render('main/404')
+  })
+})
 
 module.exports = router

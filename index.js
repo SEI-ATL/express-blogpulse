@@ -32,6 +32,15 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/articles/:id', (req, res) => {
+  let articleNo = req.params.id;
+  db.comment.findAll({
+    include: [articleNo]
+  }).then((comments) => {
+    res.render('/articles/comments')
+  })
+})
+
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
