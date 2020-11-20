@@ -7,5 +7,20 @@
 <p><%= article.content %></p>
 
 <hr />
+<% comments.forEach(comment => { %>
+  <p> <%= comment.name %> </p>
+  <p><%= comment.content %></p>
+  <% }); %>
+});
+<h3>Comments:</h3>
+<form action="/articles/:id" method="POST">
+<h4>Comment on this post</h4>
+<p>Name</p>
+<input type="text" name="name">
+<p>Name</p>
+<input type="text" name="content">
+
+<input type="button" value="Submit">
+</form>
 
 <a href="/">&larr; Back Home</a>

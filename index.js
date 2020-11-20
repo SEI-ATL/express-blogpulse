@@ -31,6 +31,15 @@ app.get('/', (req, res) => {
     res.status(400).render('main/404')
   })
 })
+// app.get('/articles/:id', (req, res) => {
+//   const id = req.params.id;
+//   db.article.findOne({
+//     where: { id: id },
+//     include: [db.comment]
+//   }).then(comment => {
+//     res.send('comment')
+//   })
+// })
 
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))
