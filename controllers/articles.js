@@ -1,4 +1,5 @@
 let express = require('express')
+const { Op } = require('sequelize')
 let db = require('../models')
 let router = express.Router()
 
@@ -36,7 +37,13 @@ router.get('/:id', (req, res) => {
   })
   .then((article) => {
     if (!article) throw Error()
-    db.comment.findAll()
+    db.comment.findAll({
+      where: {
+        articleId: {
+          [Op.eq]: article.id,
+        }
+      }
+    })
     .then(comments => {
       console.log(comments)
       res.render('articles/show', { article: article, comments: comments })
