@@ -8,4 +8,20 @@
 
 <hr />
 
+<div class="well">
+  <form action="/articles/comment" method='POST'>
+    <textarea name="content" style="width: 100%;" rows="10"></textarea>
+    <input hidden name="articleid" type="text" value="<%= article.id %>">
+    <input type="submit">
+  </form>
+</div>
+
+<hr/>
+<% comments.forEach(comment=>{ %>
+  <div class='well'>
+    <p><%= comment.content %> </p>
+    <p class="text-muted"><%= moment(comment.createdAt).calendar() %> </p>
+  </div>
+<% }) %>  
+
 <a href="/">&larr; Back Home</a>

@@ -23,7 +23,8 @@ app.use((req, res, next) => {
 // GET / - display all articles and their authors
 app.get('/', (req, res) => {
   db.article.findAll({
-    include: [db.author]
+    include: [db.author],
+    order : ['createdAt']
   }).then((articles) => {
     res.render('main/index', { articles: articles })
   }).catch((error) => {

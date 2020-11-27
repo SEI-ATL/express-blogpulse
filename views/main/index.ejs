@@ -6,8 +6,10 @@
       </div>
     </div>
     <h1>Latest Posts from BlogPulse</h1>
+    
 
-    <% articles.forEach(function(a) { %>
+    <% articles.forEach(a=> { %>
+
       <div class="well">
         <h2>
           <a href="/articles/<%= a.id %>"><%= a.title %></a>
@@ -18,6 +20,7 @@
         </p>
       </div>
     <% }) %>
+
 
   </div>
   <div class="col-sm-4">

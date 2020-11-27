@@ -1,6 +1,6 @@
-let express = require('express')
-let db = require('../models')
-let router = express.Router()
+const express = require('express')
+const db = require('../models')
+const router = express.Router()
 
 // POST /articles - create a new post
 router.post('/', (req, res) => {
@@ -27,22 +27,35 @@ router.get('/new', (req, res) => {
     res.status(400).render('main/404')
   })
 })
+router.post('/comment', (req,res)=>{
+  db.comments.findOrCreate({
+    where: {
+      articleId: req.body.articleid,
+      content: req.body.content
+    }
+  })
+  res.redirect(`/articles/${req.body.articleid}`)
+})
 
 // GET /articles/:id - display a specific post and its author
-router.get('/:id', (req, res) => {
-  db.article.findOne({
-    where: { id: req.params.id },
-    include: [db.author]
-  })
-  .then((article) => {
-    if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
-  })
-  .catch((error) => {
+router.get('/:id', async (req, res) => {
+  try{
+    let article = await db.article.findOne({
+      where: { id: req.params.id },
+      include: [db.author]
+    })
+    let comments = await db.comments.findAll({
+      where: {
+        articleId: req.params.id
+      }
+    })
+    if (comments.length === 0) comments = []
+    res.render('articles/show', { article,comments })
+
+  }catch(error){
     console.log(error)
     res.status(400).render('main/404')
-  })
+  }
 })
 
 module.exports = router
